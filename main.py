@@ -25,5 +25,3 @@ if audio:
     else:
         
         st.error(f"Transcription Error: {error}")
-
-
