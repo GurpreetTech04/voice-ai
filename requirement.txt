@@ -6,3 +6,5 @@ joblib
 groq
 requests
 dotenv
+groq_transcriber 
+gtts
