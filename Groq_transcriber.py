@@ -1,11 +1,11 @@
 # ye eh package  file bnegi
 import requests
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import time
 
 # Load environment variables
-load_dotenv()
+# load_dotenv()
 
 def transcribe_audio_with_groq(audio_bytes, api_key=None, language="en"):
     """
@@ -34,7 +34,7 @@ def transcribe_audio_with_groq(audio_bytes, api_key=None, language="en"):
     """
     # Get API key
     if api_key is None:
-        api_key = os.getenv("GROQ_API_KEY")
+        api_key = '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'
     
     # same process api diti auth li
     if not api_key:
@@ -112,7 +112,7 @@ def get_groq_llm_response(prompt, api_key=None, model="mixtral-8x7b-32768"):
     """
     # Get API key same steps eh do function bnaye ek use karna fo text
     if api_key is None:
-        api_key = os.getenv("GROQ_API_KEY")
+        api_key = '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'
     
     if not api_key:
         return None, "API key not provided"
