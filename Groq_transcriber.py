@@ -1,11 +1,10 @@
-# ye eh package  file bnegi
 import requests
 import os
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 import time
 
 # Load environment variables
-# load_dotenv()
+load_dotenv()
 
 def transcribe_audio_with_groq(audio_bytes, api_key=None, language="en"):
     """
@@ -34,33 +33,31 @@ def transcribe_audio_with_groq(audio_bytes, api_key=None, language="en"):
     """
     # Get API key
     if api_key is None:
-        api_key = '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'
+        api_key = os.getenv("GROQ_API_KEY")
     
-    # same process api diti auth li
     if not api_key:
         return None, "API key not provided. Set GROQ_API_KEY environment variable or pass api_key parameter."
     
-    # API  endpoint da url
+    # API endpoint
     url = "https://api.groq.com/openai/v1/audio/transcriptions"
     
-    # Headers api verify karne k liye
+    # Headers
     headers = {
         "Authorization": f"Bearer {api_key}"
     }
     
-    # Prepare the request jo file apa main to pass karni
+    # Prepare the request
     files = {
         'file': ('audio.wav', audio_bytes, 'audio/wav')
     }
     data = {
-        # Whisper model to use
         'model': 'whisper-large-v3',
         'language': language,
         'response_format': 'json'
     }
     
     try:
-        # Make the request sara data ppost kar dena whisper nu process karne k liye
+        # Make the request
         response = requests.post(
             url,
             headers=headers,
@@ -69,7 +66,7 @@ def transcribe_audio_with_groq(audio_bytes, api_key=None, language="en"):
             timeout=30  # 30 second timeout
         )
         
-        # Check response response status code 200 h to success
+        # Check response
         if response.status_code == 200:
             result = response.json()
             text = result.get('text', '').strip()
@@ -96,7 +93,6 @@ def transcribe_audio_with_groq(audio_bytes, api_key=None, language="en"):
     except Exception as e:
         return None, f"Unexpected error: {str(e)}"
 
-# use eh vi nhi hona eh just test li eh
 
 def get_groq_llm_response(prompt, api_key=None, model="mixtral-8x7b-32768"):
     """
@@ -110,9 +106,9 @@ def get_groq_llm_response(prompt, api_key=None, model="mixtral-8x7b-32768"):
     Returns:
         tuple: (response_text, error_message)
     """
-    # Get API key same steps eh do function bnaye ek use karna fo text
+    # Get API key
     if api_key is None:
-        api_key = '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'
+        api_key = os.getenv("GROQ_API_KEY")
     
     if not api_key:
         return None, "API key not provided"
@@ -151,8 +147,7 @@ def get_groq_llm_response(prompt, api_key=None, model="mixtral-8x7b-32768"):
         return None, f"Error: {str(e)}"
 
 
-# Simple usage example eh code is file nu text kara li eh eh use nhi honi asha main codeuper hi ci
-# 
+# Simple usage example
 if __name__ == "__main__":
     # Test with a file
     test_file = "test_audio.wav"  # Replace with your audio file
