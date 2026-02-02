@@ -1,5 +1,5 @@
 import streamlit as st
-from Groq_transcriber import transcribe_audio_with_groq
+from groq_transcriber import transcribe_audio_with_groq
 import os
 from gtts import gTTS
 import io
